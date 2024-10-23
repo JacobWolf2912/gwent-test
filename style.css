@@ -8,10 +8,10 @@ html,body
 	/* eliminate whitespace */
     width: 100%;
     height: 100%;
-    margin: 0;
-    padding: 0;
-	background-color: black;
-    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: visible;
+	scrollbar-width: none; /* disable srcrollbar for firefox */
 }
 
 /* remove spacing between html elements */
@@ -30,32 +30,18 @@ body::-webkit-scrollbar {
 
 main {
 	position: absolute;
-	width: 100%;
-	height: calc(100vw * 1080 / 1920);
+	width: 100vw;
+	height: 100vh; /* This makes the height fill the entire screen height */
 	background-image: url('img/board.jpg');
-	background-size: 100% auto;
+	background-size: contain; /* Keep the aspect ratio of the background */
+	background-position: center;
 	background-repeat: no-repeat;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
 }
 
-@media only screen and (max-width: 768px) {
-	html, body {
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
-		background-color: black;
-	}
-
-	main {
-		transform: scale(0.8);
-		transform-origin: top center;
-
-		position: absolute;
-		top: 0;
-		left: 50%;
-		transform: translateX(-50%) scale(0.8);
-		background-size: 100% auto;
-	}
-}
 
 /* makes text seleciton and highlighting invisible */
 ::selection { background: transparent; }		/* WebKit/Blink Browsers */
