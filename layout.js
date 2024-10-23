@@ -1,26 +1,23 @@
-function scaleToFit() {
-    const screenHeight = window.innerHeight;
-    const screenWidth = window.innerWidth;
-    const aspectRatio = 1920 / 1080;
-
-    // Calculate the scale factor based on height
-    const expectedWidth = screenHeight * aspectRatio;
-
+function adjustScale() {
     const mainElement = document.querySelector('main');
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    const aspectRatio = 16 / 9;
 
-    if (screenWidth < expectedWidth) {
-        // If the screen width is too small, scale down based on width
-        const scaleFactor = screenWidth / expectedWidth;
-        mainElement.style.transform = `scale(${scaleFactor})`;
-        mainElement.style.transformOrigin = 'top left'; // Reset height so the aspect ratio is preserved
+    // Calculate the optimal width based on the screen height
+    const calculatedWidth = screenHeight * aspectRatio;
+
+    if (calculatedWidth <= screenWidth) {
+        // Height is the limiting factor; scale by height
+        mainElement.style.width = `${calculatedWidth}px`;
+        mainElement.style.height = `${screenHeight}px`;
     } else {
-        // Scale based on height and add black sidebars if necessary
-        mainElement.style.transform = 'scale(1)';
-        mainElement.style.width = 'auto';  // Make sure width is auto
-        mainElement.style.height = '100vh'; // Height is full screen
+        // Width is the limiting factor; use full width and adjust height
+        mainElement.style.width = `${screenWidth}px`;
+        mainElement.style.height = `${screenWidth / aspectRatio}px`;
     }
 }
 
 // Call the function initially and on resize
-window.addEventListener('resize', scaleToFit);
-scaleToFit();
+window.addEventListener('resize', adjustScale);
+adjustScale();

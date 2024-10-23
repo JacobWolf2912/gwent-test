@@ -11,7 +11,6 @@ html,body
     margin: 0;
     padding: 0;
     overflow: hidden;
-	background-color: black;
 }
 
 /* remove spacing between html elements */
@@ -21,6 +20,9 @@ body {
 	font-family:Arial Narrow, sans-serif;
 	color: goldenrod;
 	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 /* disables scroll bar b/c it messes with % units like margins */
@@ -29,20 +31,15 @@ body::-webkit-scrollbar {
 }
 
 main {
-	position:absolute;
-	top: 0;
-	left: 0;
+	position:relative;
 	height: 100vh;
 	width: auto;
 	max-width: 100vw;
+	aspect-ratio: 16 / 9;
 	background-image: url('img/board.jpg');
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	overflow: hidden;
 }
 
 /* makes text seleciton and highlighting invisible */
