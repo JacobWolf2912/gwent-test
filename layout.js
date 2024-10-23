@@ -10,20 +10,15 @@ function scaleToFit() {
 
     if (screenWidth < expectedWidth) {
         // If the screen width is too small, scale down based on width
-        const scaleFactor = screenWidth / 1920;
+        const scaleFactor = screenWidth / expectedWidth;
         mainElement.style.transform = `scale(${scaleFactor})`;
-        mainElement.style.height = 'auto'; // Reset height so the aspect ratio is preserved
+        mainElement.style.transformOrigin = 'top left'; // Reset height so the aspect ratio is preserved
     } else {
         // Scale based on height and add black sidebars if necessary
-        const scaleFactor = screenHeight / 1080;
-        mainElement.style.transform = `scale(${scaleFactor})`;
-        mainElement.style.height = '100vh'; // Make sure it fills the height
+        mainElement.style.transform = 'scale(1)';
+        mainElement.style.width = 'auto';  // Make sure width is auto
+        mainElement.style.height = '100vh'; // Height is full screen
     }
-
-    // Centering the element horizontally if sidebars are added
-    mainElement.style.left = (screenWidth < expectedWidth)
-        ? `${(screenWidth - expectedWidth) / 2}px`
-        : '0';
 }
 
 // Call the function initially and on resize
