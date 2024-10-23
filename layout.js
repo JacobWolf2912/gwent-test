@@ -1,33 +1,31 @@
 function scaleToFit() {
-    // Get the height and width of the viewport
     const screenHeight = window.innerHeight;
     const screenWidth = window.innerWidth;
-
-    // Set your desired aspect ratio (for instance, 1920x1080)
     const aspectRatio = 1920 / 1080;
 
-    // Calculate the width that would match the screen height given the aspect ratio
+    // Calculate the scale factor based on height
     const expectedWidth = screenHeight * aspectRatio;
 
-    // Scale based on height
-    let scaleFactor = screenHeight / 1080;
-
-    // Apply the scale to the main element
     const mainElement = document.querySelector('main');
-    mainElement.style.transform = `scale(${scaleFactor})`;
 
-    // If the screen width is smaller than the expected width, center the content and apply black sidebars
     if (screenWidth < expectedWidth) {
-        // Calculate the remaining space to center the content horizontally
-        const horizontalMargin = (screenWidth - expectedWidth * scaleFactor) / 2;
-        mainElement.style.left = `${horizontalMargin}px`;
+        // If the screen width is too small, scale down based on width
+        const scaleFactor = screenWidth / 1920;
+        mainElement.style.transform = `scale(${scaleFactor})`;
+        mainElement.style.height = 'auto'; // Reset height so the aspect ratio is preserved
     } else {
-        mainElement.style.left = '0'; // Reset if it's wider
+        // Scale based on height and add black sidebars if necessary
+        const scaleFactor = screenHeight / 1080;
+        mainElement.style.transform = `scale(${scaleFactor})`;
+        mainElement.style.height = '100vh'; // Make sure it fills the height
     }
+
+    // Centering the element horizontally if sidebars are added
+    mainElement.style.left = (screenWidth < expectedWidth)
+        ? `${(screenWidth - expectedWidth) / 2}px`
+        : '0';
 }
 
-// Call the function when the window is resized
+// Call the function initially and on resize
 window.addEventListener('resize', scaleToFit);
-
-// Call the function initially to set the correct size
 scaleToFit();

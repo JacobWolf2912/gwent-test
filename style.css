@@ -30,13 +30,16 @@ body::-webkit-scrollbar {
 
 main {
 	position:absolute;
-	width: 100%;
-	height: calc(100vw * 1080 / 1920);
+	width: 100vw;
+	height: 100vh;
 	background-image: url('img/board.jpg');
-	background-size: 100% auto;
+	background-size: contain;
+	background-position: center;
 	background-repeat: no-repeat;
-	transform-origin: top left;
-	background-color: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
 }
 
 /* makes text seleciton and highlighting invisible */
